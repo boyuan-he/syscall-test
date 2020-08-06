@@ -10,19 +10,37 @@
 extern int errno;
 
 int main(int argc, char *argv[]) {
-  if(argc != 2) {
-    printf("Error: wrong number of arguements\n");
+  if(argc < 2) {
+    printf("Error: need path to be the first argument\n");
     return 1;
   }
 
-  int fd = symlink(argv[1], O_RDWR);
+  int fd = open(argv[1], O_RDONLY);
   if(fd < 0) {
     printf("Error: open failed %d\n", fd);
     printf("Error: %s (errno=%d)\n", strerror(errno), errno);
     return 1;
   }
 
-  printf("Open: %d\n", fd);
+  char buf[10];
+  int ret;
+  if((ret = read(fd, buf, 5)) < 0) {
+    printf("Error: read failed %d\n", ret);
+    printf("Error: %s (errno=%d)\n", strerror(errno), errno);
+    return 1;
+  }
+  if(ret != 5) {
+    printf("Error: read failed to read 5 bytes but %d\n", ret);
+  }
 
+  buf[5] = '\0';
+  printf("Read: %s\n", buf);
+
+  f((ret = close(fd, buf, 5))) {
+    printf("Error: close failed %d\n", ret);
+    printf("Error: %s (errno=%d)\n", strerror(errno), errno);
+    return 1;
+  }
+  
   return 0;
 }
