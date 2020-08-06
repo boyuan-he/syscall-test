@@ -36,8 +36,7 @@ int main(int argc, char *argv[]) {
   buf[5] = '\0';
   printf("Read: %s\n", buf);
 
-  if(ret = close(fd)) {
-    printf("Error: close failed %d\n", ret);
+  if(close(fd)) {
     printf("Error: %s (errno=%d)\n", strerror(errno), errno);
     return 1;
   }
