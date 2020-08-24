@@ -36,13 +36,6 @@ int main(int argc, char *argv[]) {
     int num = 0;
     while(ret > 0) {
         ret = read(fd, buf, bytesToRead);
-        num ++;
-        printf("Number of read done %d\n", num);
-        // if (ret < 0) {
-        //     printf("Error: read failed %d\n", ret);
-        //     printf("Error: %s (errno=%d)\n", strerror(errno), errno);
-        //     return 1;
-        // }
     };
     printf("Number of read done %d\n", num);
 
