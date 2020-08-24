@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     char * buf = malloc(bytesToRead+1);
     int ret;
     int num = 0;
-    while(true) {
+    while(ret > 0) {
         ret = read(fd, buf, bytesToRead);
         num ++;
         printf("Number of read done %d\n", num);
