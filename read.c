@@ -33,11 +33,14 @@ int main(int argc, char *argv[]) {
 
     char * buf = malloc(bytesToRead+1);
     int ret;
-    int num = 0;
-    while(ret > 0) {
-        ret = pread(fd, buf, bytesToRead, 0);
-    };
-    printf("Number of read done %d\n", num);
+    if((ret = read(fd, buf, bytesToRead)) < 0) {
+        printf("Error: read failed %d\n", ret);
+        printf("Error: %s (errno=%d)\n", strerror(errno), errno);
+        return 1;
+    }
+    if(ret != bytesToRead) {
+        printf("Warn: read wanted to read %ld bytes but got %d\n", bytesToRead, ret);
+    }
 
     buf[bytesToRead] = '\0';
     printf("Read: %s\n", buf);
