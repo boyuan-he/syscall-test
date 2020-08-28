@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     int ret;
     int num = 0;
     while(ret > 0) {
-        ret = read(fd, buf, bytesToRead);
+        ret = pread(fd, buf, bytesToRead, 0);
     };
     printf("Number of read done %d\n", num);
 
